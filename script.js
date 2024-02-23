@@ -118,3 +118,25 @@ document.addEventListener("keydown",(e) => {
 
   }
 });
+
+
+// Fetching the data
+
+async function fetching()
+{
+try{
+  const resolve= await  fetch('http://localhost:3000/employees')
+  const data= await resolve.json();
+
+  console.log(data);
+
+}
+catch(error){
+  console.log(error);
+}
+
+}
+
+fetching();
+
+
