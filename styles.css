@@ -599,3 +599,21 @@ box-shadow: none;
   top:120px;
   z-index: 2;
 }
+#tbody td{
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primarytextcolor) !important;
+
+}
+
+.table th{
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(139, 149, 183, 1);
+
+  
+}
+
+.table>:not(:last-child)>:last-child>* {
+  border-bottom-color: rgba(211, 216, 226, 1) !important;
+}

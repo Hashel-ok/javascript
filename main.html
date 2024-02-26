@@ -98,14 +98,14 @@
                   <th scope="col"></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="tbody">
                 <tr>
-                  <th scope="row">1</th>
+                  <td>1</td>
                   <td>Mark david</td>
                   <td>mark@gmail.com</td>
                   <td>9633126808</td>
                   <td>Male</td>
-                  <td>360/10/1998</td>
+                  <td>27/10/1998</td>
                   <td>America</td>
                   <td>
                     <div class="dropdown">
@@ -114,7 +114,7 @@
                       </button>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item view_Details" href="profilepage.html" target="_blank"><i class="fa-solid fa-eye"></i> View Details</a></li>
-                        <li><a class="dropdown-item edit" href="#"><i class="fa-regular fa-pen-to-square"></i>Edit</a></li>
+                        <li><a class="dropdown-item edit" id="edit" href="#"><i class="fa-regular fa-pen-to-square"></i>Edit</a></li>
                         <li><a class="dropdown-item delet" href="#"> <i class="fa-solid fa-trash"></i> Delete</a></li>
                       </ul>
                     </div>
@@ -219,7 +219,9 @@
             <option value="2">Mrs</option>
             <option value="3">Ms</option>
           </select>
+          <div></div>
         </div>
+       
 
         <div class="col-5 pt-4">
           <label class="form_heading" for="first_name"><h6>First name</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
@@ -243,7 +245,7 @@
     </div>
 <div class="col-6  pt-4">
 <label class="form_heading" for="Mob_no"><h6>Mobile Number</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-      <input type="email" class="form-control" id="Mob_no" placeholder="enter mobile number" aria-describedby="emailHelp">
+      <input type="number" class="form-control" id="Mob_no" placeholder="enter mobile number" aria-describedby="emailHelp">
 </div>
 
   </div>
