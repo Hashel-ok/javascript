@@ -1,7 +1,8 @@
 
 
 
-// Fetching the data
+//Fetching the data
+
 async function fetching()
 {
 try{
@@ -10,7 +11,6 @@ try{
 
   // console.log(data);
   displaytotable(data)
-
 
 
 }
@@ -29,7 +29,7 @@ fetching();
 // });
 
 function displaytotable(data){
-  // console.log(data[0]);
+
 
   const tbody=document.getElementById("tbody");
   let list=``;
@@ -59,20 +59,14 @@ function displaytotable(data){
   </tr>`
 i++;
   tbody.innerHTML=list;
-    // console.log(li);
+  
   });
 }
 
 
-
-
-
-
-
-
 //displaying and hidding for add employee form
 
-const add_Employe_Form=document.querySelector(".add_Employe_Form");
+let add_Employe_Form=document.querySelector(".add_Employe_Form");
 const overlay=document.querySelector(".overlay");
 const addemployebtn=document.querySelector(".addemployebtn");
 const add_employe_closebtn=document.querySelector(".add_employe_closebtn");
@@ -87,10 +81,82 @@ const openaddemploye=function(){
 }
 addemployebtn.addEventListener("click",openaddemploye);
 
+const salutation=document.getElementById("salutation")
+const first_name=document.getElementById("f-name");
+const last_name=document.getElementById("l-name");
+const email=document.getElementById("e-mail");
+const mob_no=document.getElementById("mob-no");
+const dateofbirth=document.getElementById("dateofbirth");
+const maleradio=document.getElementById("inlineRadio1");
+const femaleradio=document.getElementById("inlineRadio2");
+const address=document.getElementById("add-ress");
+const country=document.getElementById("country");
+const state=document.getElementById("state");
+const city=document.getElementById("c-ity");
+const qualification=document.getElementById("quali-fication");
+// const pincode=document.getElementById("pin-code");
+const username=document.getElementById("user-name");
+const password=document.getElementById("pass-word");
 
 
 
+function dob(dateofbirth){
 
+  dateofbirth.split("-");
+  let year=bg[0];
+  let month=bg[1];
+  let day=bg[2];
+
+  let dateformat=day+'-'+month+'-'+year;
+
+  return dateformat;
+
+}
+
+// console.log(newDate, "successs");
+
+function new_employes(){
+
+  let emply={
+
+    salutation:salutation.value,
+    firstName:first_name.value,
+    lastName:last_name.value,
+    email:email.value,
+    phone:mob_no.value,
+    dob:dob(dateofbirth.value),
+    gender:maleradio.value,
+    qualifications:qualification.value,
+    address:address.value,
+    city:city.value,
+    state:state.value,
+    country:country.value,
+    username:username.value,
+    password:password.value,
+    
+  };
+  console.log(emply);
+ return emply;
+
+}
+// new_employes();
+
+function addemplytotable(){
+
+  fetch("http://localhost:3000/employees",{
+  
+  method: "POST",
+  headers: { "Content-type": "application/json" },
+  body: JSON.stringify(new_employes()),
+})
+
+
+}
+
+
+
+// .then((response) => response.json())
+// .then((json) => console.log(json));
 
 
 
@@ -144,7 +210,7 @@ const edit_employe_open=function(){
   
 
 }
-// edt.addEventListener("click",edit_employe_open);
+edt.addEventListener("click",edit_employe_open);
 // console.log("sc");
 
 
@@ -211,5 +277,62 @@ document.addEventListener("keydown",(e) => {
 
   }
 });
+
+
+// add_Employe_Form.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   formvalidation();
+// });
+
+
+// let formvalidation= () => {
+
+//   if(first_name.value==="")
+//   {
+//     fname_err.innerHTML="mandatory";
+//     console.log("failure");
+//   }
+//   else{
+//     console.log("success");
+//     fname_err.innerHTML="";
+//   }
+ 
+
+//   if(last_name.value==="")
+//   {
+//     lname_err.innerHTML="mandatory";
+//     console.log("failure");
+//   }
+//   else{
+//     console.log("success");
+//     lname_err.innerHTML="";
+//   }
+
+
+//   if(email.value==="")
+//   {
+//     email_err.innerHTML="mandatory";
+//     console.log("failure");
+//   }
+//   else{
+//     console.log("success");
+//     email_err.innerHTML="";
+//   }
+
+//   if(Mob_no.value==="")
+//   {
+//     Mob_no_err.innerHTML="mandatory";
+//     console.log("failure");
+//   }
+//   else{
+//     console.log("success");
+//     mob_no_err.innerHTML="";
+//   }
+
+
+
+// }
+
+
 
 

@@ -139,7 +139,8 @@
     
           </div>
 
-        </div>
+       
+          
 
         
         <div class="d-flex flex-row-reverse align-items-end p-3 page_Sec ">
@@ -213,41 +214,44 @@
       <div class="row">
         <div class=" col-3 pt-4 ">
           <label class="form_heading" for="form-select1"><h6>Salutation</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-          <select class="form-select" aria-label="Default select example" id="form-select1">
+          <select class="form-select" aria-label="Default select example" id="salutation">
             <option selected>Select</option>
-            <option value="1">Mr</option>
-            <option value="2">Mrs</option>
-            <option value="3">Ms</option>
+            <option>Mr</option>
+            <option >Mrs</option>
+            <option>Ms</option>
           </select>
-          <div></div>
+       
         </div>
        
 
         <div class="col-5 pt-4">
-          <label class="form_heading" for="first_name"><h6>First name</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
+          <label class="form_heading" for="f-name"><h6>First name</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
           <div class="col">
-            <input type="text" class="form-control" placeholder="First name" aria-label="First name" id="first_name">
+            <input type="text" class="form-control" placeholder="First name" aria-label="First name" id="f-name">
           </div>
+          <!-- <div class="msg" id="fname_err"></div> -->
         </div>
         <div class=" col-4 pt-4">
-          <label class="form_heading" for="last_name"><h6>Last name</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
+          <label class="form_heading" for="l-name"><h6>Last name</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
           <div class="col">
-            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" id="last_name">
+            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" id="l-name">
           </div>
+          <!-- <div class="msg" id="lname_err"></div> -->
         </div>
     </div>
 
 <!-- Email and contact section -->
    <div class="row">
     <div class="col-6  pt-4">
-      <label class="form_heading" for="email"><h6>Email Address</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-      <input type="email" class="form-control" id="email" placeholder="mail@simple.com" aria-describedby="emailHelp">
+      <label class="form_heading" for="e-mail"><h6>Email Address</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
+      <input type="email" class="form-control" id="e-mail" placeholder="mail@simple.com" aria-describedby="emailHelp">
     </div>
+    <!-- <div class="msg" id="email_err"></div> -->
 <div class="col-6  pt-4">
-<label class="form_heading" for="Mob_no"><h6>Mobile Number</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-      <input type="number" class="form-control" id="Mob_no" placeholder="enter mobile number" aria-describedby="emailHelp">
+<label class="form_heading" for="mob-no"><h6>Mobile Number</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
+      <input type="number" class="form-control" id="mob-no" placeholder="enter mobile number" aria-describedby="">
 </div>
-
+<!-- <div class="msg" id="mob_no_err"></div> -->
   </div>
 
 
@@ -257,30 +261,59 @@
     <div class="date_sec col-6  pt-4">
 
       <label class="form_heading" for="dateofbirth"><h6>Date Of Birth</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-      <input type="date" class="form-control" id="dateofbirth" placeholder="select date of birth" aria-describedby="emailHelp">
+      <input type="date" class="form-control" id="dateofbirth" aria-describedby="">
     </div>
     
     <div class="gender_sec col-6 pt-4">
 
       <label class="form_heading" for="inlineRadio1"><h6>Gender</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
       <div class="form-check form-check-inline pt-2">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Male">
         <label class="form-check-label" for="inlineRadio1">Male</label>
       </div>
       <div class="form-check form-check-inline ">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Female">
         <label class="form-check-label" for="inlineRadio2">Female</label>
       </div>
     </div>
    </div>
 
+<!-- Username and password -->
+   <div class="row">
+    <div class="col-6  pt-4">
+      <label class="form_heading" for="user-name"><h6>Username</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
+        <input type="text" class="form-control" placeholder="enter username" aria-label="username" id="user-name">
+      
+    </div>
+ 
+    <div class="col-6  pt-4">
+      <label class="form_heading" for="pass-word"><h6>Password</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
+        <input type="password" class="form-control" placeholder="enter username" aria-label="username" id="pass-word">
+      
+    </div>
+
+    
+  </div>
+
+   <!-- Qualification -->
+   <div class="row">
+
+    <div class="col pt-4">
+      <label class="form_heading" for="quali-fication"><h6>Qualification</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
+      <div class="col">
+      <input type="text" class="form-control" placeholder="enter qualification" aria-label="Last name" id="quali-fication">
+    </div>
+    </div>
+   </div>
+
+
    <!-- Adresss -->
    <div class="row">
 
     <div class="col pt-4">
-      <label class="form_heading" for="address"><h6>Address</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
+      <label class="form_heading" for="add-ress"><h6>Address</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
       <div class="col">
-      <input type="text" class="form-control" placeholder="enter address" aria-label="Last name" id="address">
+      <input type="text" class="form-control" placeholder="enter address" aria-label="Last name" id="add-ress">
     </div>
     </div>
    </div>
@@ -290,9 +323,9 @@
   <label class="form_heading" for="country"><h6>Country</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
           <select class="form-select" aria-label="Default select example" id="country">
             <option selected>Select country</option>
-            <option value="1">America</option>
-            <option value="2">India</option>
-            <option value="3">Newzeland</option>
+            <option>America</option>
+            <option>India</option>
+            <option>Newzeland</option>
           </select>
 
 </div>
@@ -300,9 +333,9 @@
 <label class="form_heading" for="state"><h6>State</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
         <select class="form-select" aria-label="Default select example" id="state">
           <option selected>Select state</option>
-          <option value="1"></option>
-          <option value="2"></option>
-          <option value="3"></option>
+          <option>Kerala</option>
+          <option>Tamil Nadu</option>
+          <option>Karnataka</option>
         </select>
 
 </div>
@@ -311,13 +344,13 @@
 <!-- City and Pincode -->
   <div class="row">
     <div class="col-6  pt-4">
-      <label class="form_heading" for="city"><h6>City</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-        <input type="text" class="form-control" placeholder="enter city" aria-label="city" id="city">
+      <label class="form_heading" for="c-ity"><h6>City</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
+        <input type="text" class="form-control" placeholder="enter city" aria-label="city" id="c-ity">
       
     </div>
     <div class="col-6  pt-4">
-      <label class="form_heading" for="Pincode"><h6>Pin/Zip</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-        <input type="text" class="form-control" placeholder="enter zip/pin" aria-label="zip/pin" id="Pincode">
+      <label class="form_heading" for="pin-code"><h6>Pin/Zip</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
+        <input type="text" class="form-control" placeholder="enter zip/pin" aria-label="zip/pin" id="pin-code">
       
     </div>
 
@@ -329,7 +362,7 @@
    
 
     <div class="bottom_butns d-flex gap-2 flex-row-reverse">
-      <button class="btn-primary" type="button">Add employee</button>
+      <button class="btn-primary" type="button" onclick="addemplytotable()">Add employee</button>
       <button class=" c_btn btn-primary add_emply_cancel_btn" type="button">Cancel</button>
       
     </div>
