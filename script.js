@@ -66,12 +66,12 @@ i++;
 
 //displaying and hidding for add employee form
 
-let add_Employe_Form=document.querySelector(".add_Employe_Form");
+const add_Employe_Form=document.querySelector(".add_Employe_Form");
 const overlay=document.querySelector(".overlay");
 const addemployebtn=document.querySelector(".addemployebtn");
 const add_employe_closebtn=document.querySelector(".add_employe_closebtn");
 const add_emply_cancel_btn=document.querySelector(".add_emply_cancel_btn");
-
+const form_add_btn=document.querySelector(".form_add_btn");
 // function to display the add_emplye_form
 
 const openaddemploye=function(){
@@ -80,6 +80,9 @@ const openaddemploye=function(){
 
 }
 addemployebtn.addEventListener("click",openaddemploye);
+
+
+form_add_btn.addEventListener("click", addemplytotable);
 
 const salutation=document.getElementById("salutation")
 const first_name=document.getElementById("f-name");
@@ -102,10 +105,10 @@ const password=document.getElementById("pass-word");
 
 function dob(dateofbirth){
 
-  dateofbirth.split("-");
-  let year=bg[0];
-  let month=bg[1];
-  let day=bg[2];
+  let db=dateofbirth.split("-");
+  let year=db[0];
+  let month=db[1];
+  let day=db[2];
 
   let dateformat=day+'-'+month+'-'+year;
 
@@ -113,10 +116,12 @@ function dob(dateofbirth){
 
 }
 
-// console.log(newDate, "successs");
 
-function new_employes(){
 
+function addemplytotable(){
+
+
+  
   let emply={
 
     salutation:salutation.value,
@@ -125,7 +130,7 @@ function new_employes(){
     email:email.value,
     phone:mob_no.value,
     dob:dob(dateofbirth.value),
-    gender:maleradio.value,
+    gender:(maleradio.checked==true) ? 'Male' : 'Female',
     qualifications:qualification.value,
     address:address.value,
     city:city.value,
@@ -135,19 +140,12 @@ function new_employes(){
     password:password.value,
     
   };
-  console.log(emply);
- return emply;
-
-}
-// new_employes();
-
-function addemplytotable(){
 
   fetch("http://localhost:3000/employees",{
   
   method: "POST",
   headers: { "Content-type": "application/json" },
-  body: JSON.stringify(new_employes()),
+  body: JSON.stringify(emply),
 })
 
 
