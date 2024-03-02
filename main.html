@@ -164,7 +164,7 @@
             </ul>
           </nav>
         </div>
-
+      </div>
 <!-- footer section -->
 
 
@@ -181,7 +181,7 @@
       </div>
 
         
-      </div>
+    
     
 
   </div>
@@ -194,7 +194,7 @@
   <!-- <div class="add_employe_section "> -->
   
     
-    <div class="content_Sec p-4  bg-white add_Employe_Form hidden">
+    <form class="content_Sec p-4  bg-white add_Employe_Form hidden">
         
       <header class="form_Sect d-flex justify-content-between">
         <h4>Add Employee</h4>  
@@ -215,28 +215,29 @@
         <div class=" col-3 pt-4 ">
           <label class="form_heading" for="form-select1"><h6>Salutation</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
           <select class="form-select" aria-label="Default select example" id="salutation">
-            <option selected>Select</option>
+            <option selected value="">Select</option>
             <option>Mr</option>
             <option >Mrs</option>
             <option>Ms</option>
           </select>
-       
+          <div class="error_msg" ></div>
         </div>
        
 
         <div class="col-5 pt-4">
           <label class="form_heading" for="f-name"><h6>First name</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-          <div class="col">
+          <!-- <div class="col"> -->
             <input type="text" class="form-control" placeholder="First name" aria-label="First name" id="f-name">
-          </div>
-          <!-- <div class="msg" id="fname_err"></div> -->
+            <div class="error_msg"></div>
+          <!-- </div> -->
+          
         </div>
         <div class=" col-4 pt-4">
           <label class="form_heading" for="l-name"><h6>Last name</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-          <div class="col">
+          <!-- <div class="col"> -->
             <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" id="l-name">
-          </div>
-          <!-- <div class="msg" id="lname_err"></div> -->
+            <div class="error_msg"></div>
+          <!-- </div> -->
         </div>
     </div>
 
@@ -245,11 +246,13 @@
     <div class="col-6  pt-4">
       <label class="form_heading" for="e-mail"><h6>Email Address</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
       <input type="email" class="form-control" id="e-mail" placeholder="mail@simple.com" aria-describedby="emailHelp">
+      <div class="error_msg"></div>
     </div>
     <!-- <div class="msg" id="email_err"></div> -->
 <div class="col-6  pt-4">
 <label class="form_heading" for="mob-no"><h6>Mobile Number</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
       <input type="number" class="form-control" id="mob-no" placeholder="enter mobile number" aria-describedby="">
+      <div class="error_msg"></div>
 </div>
 <!-- <div class="msg" id="mob_no_err"></div> -->
   </div>
@@ -262,6 +265,7 @@
 
       <label class="form_heading" for="dateofbirth"><h6>Date Of Birth</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
       <input type="date" class="form-control" id="dateofbirth" aria-describedby="">
+      <div class="error_msg"></div>
     </div>
     
     <div class="gender_sec col-6 pt-4">
@@ -275,6 +279,7 @@
         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Female">
         <label class="form-check-label" for="inlineRadio2">Female</label>
       </div>
+      <div class="error_msg"></div>
     </div>
    </div>
 
@@ -283,12 +288,14 @@
     <div class="col-6  pt-4">
       <label class="form_heading" for="user-name"><h6>Username</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
         <input type="text" class="form-control" placeholder="enter username" aria-label="username" id="user-name">
+        <div class="error_msg"></div>
       
     </div>
  
     <div class="col-6  pt-4">
       <label class="form_heading" for="pass-word"><h6>Password</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
         <input type="password" class="form-control" placeholder="enter username" aria-label="username" id="pass-word">
+        <div class="error_msg"></div>
       
     </div>
 
@@ -300,9 +307,9 @@
 
     <div class="col pt-4">
       <label class="form_heading" for="quali-fication"><h6>Qualification</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-      <div class="col">
+   
       <input type="text" class="form-control" placeholder="enter qualification" aria-label="Last name" id="quali-fication">
-    </div>
+      <div class="error_msg"></div>
     </div>
    </div>
 
@@ -312,9 +319,9 @@
 
     <div class="col pt-4">
       <label class="form_heading" for="add-ress"><h6>Address</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-      <div class="col">
+
       <input type="text" class="form-control" placeholder="enter address" aria-label="Last name" id="add-ress">
-    </div>
+      <div class="error_msg"></div>
     </div>
    </div>
 <!-- country and state -->
@@ -322,22 +329,22 @@
 <div class="col-6 pt-4">
   <label class="form_heading" for="country"><h6>Country</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
           <select class="form-select" aria-label="Default select example" id="country">
-            <option selected>Select country</option>
+            <option selected value="">Select country</option>
             <option>America</option>
             <option>India</option>
             <option>Newzeland</option>
           </select>
-
+          <div class="error_msg"></div>
 </div>
 <div class="col-6 pt-4">
 <label class="form_heading" for="state"><h6>State</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
         <select class="form-select" aria-label="Default select example" id="state">
-          <option selected>Select state</option>
+          <option selected value="">Select state</option>
           <option>Kerala</option>
           <option>Tamil Nadu</option>
           <option>Karnataka</option>
         </select>
-
+        <div class="error_msg"></div>
 </div>
 
   </div>
@@ -346,12 +353,12 @@
     <div class="col-6  pt-4">
       <label class="form_heading" for="c-ity"><h6>City</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
         <input type="text" class="form-control" placeholder="enter city" aria-label="city" id="c-ity">
-      
+        <div class="error_msg"></div>
     </div>
     <div class="col-6  pt-4">
       <label class="form_heading" for="pin-code"><h6>Pin/Zip</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
-        <input type="text" class="form-control" placeholder="enter zip/pin" aria-label="zip/pin" id="pin-code">
-      
+        <input type="number" class="form-control" placeholder="enter zip/pin" aria-label="zip/pin" id="pin-code">
+        <div class="error_msg"></div>
     </div>
 
 
@@ -371,7 +378,7 @@
 </div>
 
 
-  </div>
+</form>
 <!-- 
 </div> -->
 
@@ -420,6 +427,7 @@
         <label class="form_heading" for="first_name"><h6>First name</h6><i class="fa-solid fa-asterisk asterisk"></i></label>
         <div class="col">
           <input type="text" class="form-control" placeholder="First name" aria-label="First name" id="first_name">
+          
         </div>
       </div>
       <div class=" col-4 pt-4">

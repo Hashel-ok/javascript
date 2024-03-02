@@ -21,12 +21,6 @@ catch(error){
 
 fetching();
 
-// fetching().then(data => {
-//   console.log(data); // Log the fetched data
-// })
-// .catch(error => {
-//   console.log(error);
-// });
 
 function displaytotable(data){
 
@@ -72,6 +66,8 @@ const addemployebtn=document.querySelector(".addemployebtn");
 const add_employe_closebtn=document.querySelector(".add_employe_closebtn");
 const add_emply_cancel_btn=document.querySelector(".add_emply_cancel_btn");
 const form_add_btn=document.querySelector(".form_add_btn");
+
+
 // function to display the add_emplye_form
 
 const openaddemploye=function(){
@@ -80,91 +76,6 @@ const openaddemploye=function(){
 
 }
 addemployebtn.addEventListener("click",openaddemploye);
-
-
-form_add_btn.addEventListener("click", addemplytotable);
-
-const salutation=document.getElementById("salutation")
-const first_name=document.getElementById("f-name");
-const last_name=document.getElementById("l-name");
-const email=document.getElementById("e-mail");
-const mob_no=document.getElementById("mob-no");
-const dateofbirth=document.getElementById("dateofbirth");
-const maleradio=document.getElementById("inlineRadio1");
-const femaleradio=document.getElementById("inlineRadio2");
-const address=document.getElementById("add-ress");
-const country=document.getElementById("country");
-const state=document.getElementById("state");
-const city=document.getElementById("c-ity");
-const qualification=document.getElementById("quali-fication");
-// const pincode=document.getElementById("pin-code");
-const username=document.getElementById("user-name");
-const password=document.getElementById("pass-word");
-
-
-
-function dob(dateofbirth){
-
-  let db=dateofbirth.split("-");
-  let year=db[0];
-  let month=db[1];
-  let day=db[2];
-
-  let dateformat=day+'-'+month+'-'+year;
-
-  return dateformat;
-
-}
-
-
-
-function addemplytotable(){
-
-
-  
-  let emply={
-
-    salutation:salutation.value,
-    firstName:first_name.value,
-    lastName:last_name.value,
-    email:email.value,
-    phone:mob_no.value,
-    dob:dob(dateofbirth.value),
-    gender:(maleradio.checked==true) ? 'Male' : 'Female',
-    qualifications:qualification.value,
-    address:address.value,
-    city:city.value,
-    state:state.value,
-    country:country.value,
-    username:username.value,
-    password:password.value,
-    
-  };
-
-  fetch("http://localhost:3000/employees",{
-  
-  method: "POST",
-  headers: { "Content-type": "application/json" },
-  body: JSON.stringify(emply),
-})
-
-
-}
-
-
-
-// .then((response) => response.json())
-// .then((json) => console.log(json));
-
-
-
-
-
-
-
-
-
-
 
 
 // function to hide the add_emplye_form
@@ -186,6 +97,227 @@ document.addEventListener("keydown",(e) => {
 
   }
 });
+
+
+
+// function to push the data to the API
+
+
+
+const salutation=document.getElementById("salutation")
+const first_name=document.getElementById("f-name");
+const last_name=document.getElementById("l-name");
+const email=document.getElementById("e-mail");
+const mob_no=document.getElementById("mob-no");
+const dateofbirth=document.getElementById("dateofbirth");
+const maleradio=document.getElementById("inlineRadio1");
+const femaleradio=document.getElementById("inlineRadio2");
+const address=document.getElementById("add-ress");
+const country=document.getElementById("country");
+const state=document.getElementById("state");
+const city=document.getElementById("c-ity");
+const qualification=document.getElementById("quali-fication");
+const pincode=document.getElementById("pin-code");
+const username=document.getElementById("user-name");
+const password=document.getElementById("pass-word");
+const errorMsg = document.getElementsByClassName("error_msg");
+
+
+
+function dob(dateofbirth){
+
+  let db=dateofbirth.split("-");
+  let year=db[0];
+  let month=db[1];
+  let day=db[2];
+
+  let dateformat=day+'-'+month+'-'+year;
+
+  return dateformat;
+
+}
+
+
+
+async function addemplytotable(){
+
+ 
+  let emply={
+
+    salutation:salutation.value,
+    firstName:first_name.value,
+    lastName:last_name.value,
+    email:email.value,
+    phone:mob_no.value,
+    dob:dob(dateofbirth.value),
+    gender:(maleradio.checked==true) ? 'Male' : 'Female',
+    qualifications:qualification.value,
+    address:address.value,
+    city:city.value,
+    state:state.value,
+    country:country.value,
+    username:username.value,
+    password:password.value,
+    pincode:pincode.value
+    
+  };
+  try {
+    const response= await fetch("http://localhost:3000/employees",{
+  
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(emply),
+  })
+
+  if(!response.ok) {
+    throw new error ( `error found ${response.status}`);
+  }
+
+  closeaddemploye();
+  add_Employe_Form.reset();
+
+    
+  }
+  
+  catch (error) {
+    console.error("form empty", error);
+  }
+ 
+
+}
+
+
+
+form_add_btn.addEventListener("click", (e)=> {
+ 
+  e.preventDefault();
+
+ //validation for add employee
+
+
+  validateInput(salutation, 0, "Please select salutation");
+  validateInput(first_name, 1, "Please enter first Name");
+  validateInput(last_name, 2, "Please enter last Name");
+  validateEmail(email, 3, "Please enter email");
+  validatePhoneno(mob_no, 4, "Please enter phone no");
+  validateInput(dateofbirth, 5, "Please select dateofbirth");
+  validateGender("Please select the Gender");
+  validateInput(username, 7, "Please enter username");
+  validateInput(password, 8, "Please enter password");
+  validateInput(qualification, 9, "Please enter qualifications");
+  validateInput(address, 10, "Please enter address");
+  validateInput(country, 11, "Please select country");
+  validateInput(state, 12, "Please select state");
+  validateInput(city, 13, "please enter city");
+  validateInput(pincode, 14, "please enter pincode");
+
+  addemplytotable();
+
+  fetching();
+
+  console.log("sucess")
+});
+
+
+const validateInput = (input, serial, msg) => {
+  if(input.value.trim() === ""){
+    errorMsg[serial].innerHTML = msg;
+  } 
+  else {
+    errorMsg[serial].innerHTML = "";
+  }
+  
+}
+
+const validatePhoneno=(input,serial,msg) => {
+  let mobnovalue=input.value.trim();
+
+  if(mobnovalue==="")
+  {
+    errorMsg[serial].innerHTML = msg;
+  }
+
+  else if((mobnovalue.length)!= 10)
+  {
+
+    errorMsg[serial].innerHTML ="Invalid phone no";
+  }
+  else{
+    errorMsg[serial].innerHTML ="";
+  }
+
+}
+
+
+const validateEmail=(input,serial,msg) => 
+{
+    let emailvalue=input.value.trim();
+    let emailregex= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if(emailvalue==="")
+  {
+    errorMsg[serial].innerHTML = msg;
+  }
+
+  else if(!(emailvalue.match(emailregex)))
+  {
+    errorMsg[serial].innerHTML="Invalid Email";
+  }
+
+else{
+  errorMsg[serial].innerHTML="";
+}
+}
+
+
+const validateGender= (msg) => {
+
+if(!maleradio.checked==true && !femaleradio.checked==true )
+{
+  errorMsg[6].innerHTML=msg;
+}
+else{
+  errorMsg[6].innerHTML="";
+}
+
+}
+
+
+salutation.addEventListener("input",() => remove_validation_error(0));
+first_name.addEventListener("input",() => remove_validation_error(1))
+last_name.addEventListener("input", () => remove_validation_error(2))
+email.addEventListener("input",() => remove_validation_error(3));
+mob_no.addEventListener("input",() => remove_validation_error(4));
+dateofbirth.addEventListener("input",() => remove_validation_error(5));
+maleradio.addEventListener("input",() => remove_validation_error(6));
+femaleradio.addEventListener("input",() => remove_validation_error(6));
+username.addEventListener("input",() => remove_validation_error(7));
+password.addEventListener("input",() => remove_validation_error(8));
+qualification.addEventListener("input",() => remove_validation_error(9));
+address.addEventListener("input",() => remove_validation_error(10));
+country.addEventListener("input",() => remove_validation_error(11));
+state.addEventListener("input",() => remove_validation_error(12));
+city.addEventListener("input",() => remove_validation_error(13));
+pincode.addEventListener("input",() => remove_validation_error(14));
+
+
+function remove_validation_error(serial) 
+
+{
+
+    errorMsg[serial].innerHTML="";
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -275,61 +407,6 @@ document.addEventListener("keydown",(e) => {
 
   }
 });
-
-
-// add_Employe_Form.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   formvalidation();
-// });
-
-
-// let formvalidation= () => {
-
-//   if(first_name.value==="")
-//   {
-//     fname_err.innerHTML="mandatory";
-//     console.log("failure");
-//   }
-//   else{
-//     console.log("success");
-//     fname_err.innerHTML="";
-//   }
- 
-
-//   if(last_name.value==="")
-//   {
-//     lname_err.innerHTML="mandatory";
-//     console.log("failure");
-//   }
-//   else{
-//     console.log("success");
-//     lname_err.innerHTML="";
-//   }
-
-
-//   if(email.value==="")
-//   {
-//     email_err.innerHTML="mandatory";
-//     console.log("failure");
-//   }
-//   else{
-//     console.log("success");
-//     email_err.innerHTML="";
-//   }
-
-//   if(Mob_no.value==="")
-//   {
-//     Mob_no_err.innerHTML="mandatory";
-//     console.log("failure");
-//   }
-//   else{
-//     console.log("success");
-//     mob_no_err.innerHTML="";
-//   }
-
-
-
-// }
 
 
 

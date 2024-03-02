@@ -31,8 +31,9 @@
 }
 
 
-.msg{
+.error_msg{
   color: red;
+  font-size: 12px;
 }
 
 
@@ -567,9 +568,10 @@ box-shadow: none;
   top: 30px;
   margin: auto;
   overflow-y: scroll;
-  left: 30%;
+  left: 25%;
   z-index: 2;
   height: 90vh;
+  width: 792px;
 }
 
 
