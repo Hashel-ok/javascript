@@ -35,7 +35,14 @@
   color: red;
   font-size: 12px;
 }
+#profilepic{
 
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+/* margin-bottom: 30px; */
+margin-top: 20px;
+}
 
 
 .side_Section{
@@ -264,6 +271,7 @@
   background: #fafcfe;
   border: dashed 1px #b2bad0;
   border-radius: 13px;
+  /* height: 140px; */
 }
 
 .content_Sec .form-select {
@@ -383,10 +391,11 @@ padding-left: 15px;
 .btn-primary:active {
   background-color: none !important;
 }
-.edit_uplod{
+.edit_uplod img{
 
-  width: 140px;
-  height: 134px;
+  width: 120px;
+  height: 120px;
+  border-radius: 13px;
 }
 .change_btn{
   width: 100px;
@@ -397,6 +406,9 @@ padding-left: 15px;
   font-size: 14px;
   font-weight: 700;
   border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
 .delete_dailog{
