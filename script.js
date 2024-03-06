@@ -34,11 +34,11 @@ catch(error){
 fetching();
 
 
-
+const tbody=document.getElementById("tbody");
 
 function displaytotable(data){
 
-  const tbody=document.getElementById("tbody");
+
   let list=``;
   let i=data.length-1;
   let k = 1;
@@ -59,7 +59,7 @@ function displaytotable(data){
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <li><a class="dropdown-item view_Details" href="profilepage.html" target="_blank"><i class="fa-solid fa-eye"></i> View Details</a></li>
           <li><a class="dropdown-item edit" onclick=editemployeeform('${data[i].id}') href="#"><i class="fa-regular fa-pen-to-square"></i>Edit</a></li>
-          <li><a class="dropdown-item delet" onclick=dele_dialog_open() href="#"> <i class="fa-solid fa-trash"></i> Delete</a></li>
+          <li><a class="dropdown-item delet" onclick=deletetable('${data[i].id}') ('${k}') href="#"> <i class="fa-solid fa-trash"></i> Delete</a></li>
         </ul>
       </div>
     
@@ -118,7 +118,6 @@ document.addEventListener("keydown",(e) => {
 // function to push the data to the API
 
 
-
 const salutation=document.getElementById("salutation")
 const first_name=document.getElementById("f-name");
 const last_name=document.getElementById("l-name");
@@ -149,9 +148,6 @@ inputfile.onchange=function(){
   profilepic.src=URL.createObjectURL(inputfile.files[0]);
 
 }
-
-
-
 
 
 function dob(dateofbirth){
@@ -244,7 +240,7 @@ async function addemplytotable(){
 form_add_btn.addEventListener("click", (e)=> {
 
  
-  // e.preventDefault();
+e.preventDefault();
 
 
  validation();
@@ -262,22 +258,249 @@ form_add_btn.addEventListener("click", (e)=> {
 
 
 
+
+
+
+
+// EDIT Viewing  and updating.... 
+
+
+const edit_select=document.getElementById("edit_Select");
+const edit_fname=document.getElementById("edit_fname");
+const edit_lname=document.getElementById("edit_lname");
+const edit_mobno=document.getElementById("edit_mobno");
+const edit_email=document.getElementById("edit_email");
+const edit_dateofbirth=document.getElementById("edit_dateofbirth");
+const edit_maleradio=document.getElementById("edit_inlineRadio1");
+const edit_femaleradio=document.getElementById("edit_inlineRadio2");
+const edit_address=document.getElementById("edit_address");
+const edit_country=document.getElementById("edit_country");
+const edit_state=document.getElementById("edit_state");
+const edit_city=document.getElementById("edit_city");
+const edit_pincode=document.getElementById("edit_pincode");
+const edit_image=document.getElementById("edit_image");
+const edit_username=document.getElementById("edit_username");
+const edit_password=document.getElementById("edit_password");
+const edit_qualification=document.getElementById("edit_qualification");
+const save_btn=document.getElementById("save-btn");
+const change_btn=document.getElementsByClassName("change_btn");
+const edit_upload=document.getElementById("edit_upload");
+const edt_image=document.getElementById("edit_image");
+
+
+//previewing image while uploading
+
+
+edit_upload.onchange=function()
+{
+
+edt_image.src=URL.createObjectURL(edit_upload.files[0]);
+}
+
+
+
+// function for updating the edit form
+function edit_dob(dateofbirth){
+
+  let db=dateofbirth.split("-");
+  
+  let year=db[0];
+  let month=db[1];
+  let day=db[2];
+  
+  let dateformat=day+'-'+month+'-'+year;
+  
+  return dateformat;
+  }
+  
+  
+
+
+
+
+async function editemployeeform(id){
+
+  
+edit_employe_open();
+
+
+try{
+  const response= await fetch(`http://localhost:3000/employees/${id}`,{
+  method:"GET",
+
+})
+if(!(response.ok)){
+  throw new Error(`response not there ${response.status}`);
+}
+
+const data=await response.json();
+// console.log(data);
+
+edit_select.value=data.salutation;
+edit_fname.value=data.firstName;
+edit_lname.value=data.lastName;
+edit_dateofbirth.value=editdob(data.dob);
+gender(data.gender);
+edit_username.value=data.username;
+edit_password.value=data.password;
+edit_qualification.value=data.qualifications;
+edit_mobno.value=data.phone;
+edit_email.value=data.email;
+edit_address.value=data.address;
+edit_country.value=data.country;
+edit_state.value=data.state;
+edit_city.value=data.city;
+edit_pincode.value=data.pincode;
+
+
+function editdob(data){
+
+  let db=data.split("-");
+  let year=db[2];
+  let month=db[0];
+  let day=db[1];
+
+  let dateformat=year+'-'+day+'-'+month;
+
+return dateformat;
+
+}
+
+function gender(data)
+{
+
+  if(data==="Male")
+  {
+  edit_maleradio.checked=true;
+
+  }
+
+  else{
+  edit_femaleradio.checked=true;
+  }
+
+
+}
+
+edit_image.src=(`http://localhost:3000/employees/${id}/avatar`) // for previewing  the image during edit.
+
+}
+catch(error){
+
+  console.log(`edit form error`,error);
+
+}
+
+
+
+async function editemplychange(id)
+{
+
+
+  let newemply= {
+
+    salutation:edit_select.value,
+    firstName:edit_fname.value,
+    lastName:edit_lname.value,
+    email:edit_email.value,
+    phone:edit_mobno.value,
+    dob:edit_dob(edit_dateofbirth.value),
+    gender:(edit_maleradio.checked==true) ? 'Male' : 'Female',
+    qualifications:edit_qualification.value,
+    address:edit_address.value,
+    city:edit_city.value,
+    state:edit_state.value,
+    country:edit_country.value,
+    username:edit_username.value,
+    password:edit_password.value,
+    pincode:edit_pincode.value
+
+  };
+
+
+  try{
+
+    const response= await fetch(`http://localhost:3000/employees/${id}`,{
+     
+    method: "PUT",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(newemply),
+
+    })
+
+
+    
+
+    if(!response.ok){
+      throw new Error(`unable to update edit form ${response.status},Message: ${await response.text()} `)
+    }
+
+    const data=await response.json();
+
+    console.log(data);
+
+    
+    const avatarfile=edit_upload.files[0];
+
+    const editformdata=new FormData();
+    editformdata.append("avatar",avatarfile) 
+    await fetch(`http://localhost:3000/employees/${id}/avatar`,{
+
+      method:"POST",
+      body:editformdata,
+
+    });
+
+    tabledata.push(newemply);
+    newemply.id=id;
+    displaytotable(tabledata);
+    fetching();
+    edit_employe_close();
+    
+
+  }
+  catch(error){
+
+    console.log(`error in edit form `+ error)
+  } 
+
+}
+
+
+
+save_btn.addEventListener("click", (e) => {
+
+  e.preventDefault();
+ 
+  validation();
+  editemplychange(id);
+   
+ });
+
+
+
+}
+
+
+
+
 function validation()
 
 {
-   //validation for add employee
+
  
   const validateInput = (input, serial, msg) => {
     if(input.value.trim() === ""){
       errorMsg[serial].innerHTML = msg;
     } 
     else {
-      errorMsg[serial].innerHTML = "";
-    }
+     errorMsg[serial].innerHTML = "";
+     }
     
   }
   
   const validatePhoneno=(input,serial,msg) => {
+
     let mobnovalue=input.value.trim();
   
     if(mobnovalue==="")
@@ -330,7 +553,7 @@ function validation()
   
   }
   
-
+  //add employe validateinput
 
   validateInput(salutation, 0, "Please select salutation");
   validateInput(first_name, 1, "Please enter first Name");
@@ -349,7 +572,25 @@ function validation()
   validateInput(pincode, 14, "please enter pincode");
 
 
- 
+  //edit validate input
+
+  validateInput(edit_fname, 15, "Please enter first Name");
+  validateInput(edit_lname, 16, "Please enter last Name");
+  validateEmail(edit_email, 17, "Please enter email");
+  validatePhoneno(edit_mobno, 18, "Please enter phone no");
+
+  validateInput(edit_username, 21, "Please enter username");
+  validateInput(edit_password, 22, "Please enter password");
+  validateInput(edit_qualification, 23, "Please enter qualifications");
+  validateInput(edit_address, 24, "Please enter address");
+
+
+  validateInput(edit_city, 27, "please enter city");
+  validateInput(edit_pincode, 28, "please enter pincode");
+
+
+
+//add employe validation removal
 
 salutation.addEventListener("input",() => remove_validation_error(0));
 first_name.addEventListener("input",() => remove_validation_error(1))
@@ -369,6 +610,27 @@ city.addEventListener("input",() => remove_validation_error(13));
 pincode.addEventListener("input",() => remove_validation_error(14));
 
 
+
+
+
+//edit remove validation..............
+edit_fname.addEventListener("input",() => remove_validation_error(15))
+edit_lname.addEventListener("input", () => remove_validation_error(16))
+edit_email.addEventListener("input",() => remove_validation_error(17));
+edit_mobno.addEventListener("input",() => remove_validation_error(18));
+
+
+edit_username.addEventListener("input",() => remove_validation_error(21));
+edit_password.addEventListener("input",() => remove_validation_error(22));
+edit_qualification.addEventListener("input",() => remove_validation_error(23));
+edit_address.addEventListener("input",() => remove_validation_error(24));
+edit_country.addEventListener("input",() => remove_validation_error(25));
+edit_state.addEventListener("input",() => remove_validation_error(26));
+edit_city.addEventListener("input",() => remove_validation_error(27));
+edit_pincode.addEventListener("input",() => remove_validation_error(28));
+
+
+
 function remove_validation_error(serial) 
 
 {
@@ -378,225 +640,6 @@ function remove_validation_error(serial)
 
 
 }
-
-
-
-// EDIT Viewing  and updating.... 
-
-
-const edit_select=document.getElementById("edit_Select");
-const edit_fname=document.getElementById("edit_fname");
-const edit_lname=document.getElementById("edit_lname");
-const edit_mobno=document.getElementById("edit_mobno");
-const edit_email=document.getElementById("edit_email");
-const edit_dateofbirth=document.getElementById("edit_dateofbirth");
-const edit_maleradio=document.getElementById("edit_inlineRadio1");
-const edit_femaleradio=document.getElementById("edit_inlineRadio2");
-const edit_address=document.getElementById("edit_address");
-const edit_country=document.getElementById("edit_country");
-const edit_state=document.getElementById("edit_state");
-const edit_city=document.getElementById("edit_city");
-const edit_pincode=document.getElementById("edit_pincode");
-const edit_image=document.getElementById("edit_image");
-const edit_username=document.getElementById("edit_username");
-const edit_password=document.getElementById("edit_password");
-const edit_qualification=document.getElementById("edit_qualification");
-const save_btn=document.getElementById("save-btn");
-
-
-
-async function editemployeeform(id){
-
-  console.log(id);
-
-edit_employe_open();
-// editemplychange(id);
-
-
-
-try{
-  const response= await fetch(`http://localhost:3000/employees/${id}`,{
-  method:"GET",
-
-})
-if(!(response.ok)){
-  throw new Error(`response not there ${response.status}`);
-}
-
-const data=await response.json();
-// console.log(data);
-
-edit_select.value=data.salutation;
-edit_fname.value=data.firstName;
-edit_lname.value=data.lastName;
-edit_dateofbirth.value=editdob(data.dob);
-gender(data.gender);
-edit_username.value=data.username;
-edit_password.value=data.password;
-edit_qualification.value=data.qualifications;
-edit_mobno.value=data.phone;
-edit_email.value=data.email;
-edit_address.value=data.address;
-edit_country.value=data.country;
-edit_state.value=data.state;
-edit_city.value=data.city;
-edit_pincode.value=data.pincode;
-
-
-function editdob(data){
-
-  let db=data.split("-");
-  let year=db[2];
-  let month=db[0];
-  let day=db[1];
-
-  let dateformat=year+'-'+day+'-'+month;
-
-return dateformat;
-
-}
-function gender(data)
-{
-
-  if(data==="Male")
-  {
-  edit_maleradio.checked=true;
-
-  }
-
-  else{
-  edit_femaleradio.checked=true;
-  }
-
-
-}
-
-edit_image.src=(`http://localhost:3000/employees/${id}/avatar`) // for previewing  the image during edit.
-
-}
-catch(error){
-
-  console.log(`edit form error`,error);
-
-}
-
-
-}
-
-
-async function editemplychange(id)
-{
-
-  let newemply= {
-
-    salutation:edit_select.value,
-    firstName:edit_fname.value,
-    lastName:edit_lname.value,
-    email:edit_email.value,
-    phone:edit_mobno.value,
-    dob:edit_dob(edit_dateofbirth.value),
-    gender:(edit_maleradio.checked==true) ? 'Male' : 'Female',
-    qualifications:qualification.value,
-    address:edit_address.value,
-    city:edit_city.value,
-    state:edit_state.value,
-    country:edit_country.value,
-    username:edit_username.value,
-    password:edit_password.value,
-    pincode:edit_pincode.value
-
-  };
-
-
-  try{
-
-    const response= await fetch(`http://localhost:3000/employees/${id}`,{
-
-      // method:"PUT",
-      // headers:{"Content-type": "application/json"},
-      // body:JSON.stringify(newemply)
-
-      method: "PUT",
-    headers: { "Content-type": "application/json" },
-    body: JSON.stringify(newemply),
-
-    })
-
-    if(!response.ok){
-      throw new Error(`unable to update edit form ${response.status}`)
-    }
-
-    const data=await response.json();
-
-    console.log(data);
-
-    const edit_id=data.id;
-    const avatarfile=edit_upload.files[0];
-
-    const editformdata=new FormData();
-    editformdata.append("avatar",avatarfile) 
-    await fetch(`http://localhost:3000/employees/${edit_id}/avatar`,{
-
-      method:"PUT",
-      body:editformdata,
-
-    });
-
- 
-
-  }
-  catch(error){
-
-    console.log(`error in edit form `+ error)
-  } 
-
-}
-
-
-function edit_dob(dateofbirth){
-
-  let db=dateofbirth.split("-");
-
-  let year=db[0];
-  let month=db[1];
-  let day=db[2];
-
-  let dateformat=day+'-'+month+'-'+year;
-
-  return dateformat;
-
-}
-
-
-
-save_btn.addEventListener("click", (e) => {
-
-  editemplychange();
-  edit_employe_close();
-});
-
-
-
-
-
-
-
-//updating an emply in edit form
-
-
-//previewing image while uploading
-
-const change_btn=document.getElementsByClassName("change_btn");
-const edit_upload=document.getElementById("edit_upload");
-const edt_image=document.getElementById("edit_image");
-
-edit_upload.onchange=function()
-{
-
-edt_image.src=URL.createObjectURL(edit_upload.files[0]);
-}
-
-
 
 
 
@@ -618,7 +661,6 @@ const edit_employe_open=function(){
 
 }
 edt.addEventListener("click",edit_employe_open);
-// console.log("sc");
 
 
 // function to hide the edit_emplye_form
@@ -643,6 +685,52 @@ document.addEventListener("keydown",(e) => {
 
   }
 });
+
+
+const del_btn=document.getElementById("del_btn");
+
+async function deletetable(id,k)
+{
+
+dele_dialog_open();
+
+
+try{
+  
+  const response= await fetch(`http://localhost:3000/employees/${id}`,{
+  
+method:"DELETE",
+
+})
+if(!response.ok){
+  throw new Error(`Error in delete (${response.status})`)
+}
+
+del_btn.addEventListener("click", (e) => {
+
+  
+  tbody.deleteRow(k);
+  dele_dialog_close();
+  fetching();
+
+
+});
+
+}
+
+
+catch(error){
+  console.log("error in deletion "+ error);
+}
+
+
+}
+
+
+
+
+
+
 
 
 
@@ -684,7 +772,5 @@ document.addEventListener("keydown",(e) => {
 
   }
 });
-
-
 
 
