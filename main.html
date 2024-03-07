@@ -49,7 +49,7 @@
   
           <div class="search_Section">
             <div class="inpugroup rounded search_input">
-              <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+              <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" id= "searchinput" onkeyup="searchTable()" aria-describedby="search-addon" />
         
             </div>
             <div>
@@ -85,7 +85,7 @@
 
           </div>
           <div class=" pt-3 table_Section p-3">
-            <table class="table">
+            <table class="table" id="mytable">
               <thead>
                 <tr>
                   <th scope="col">Sl.No</th>
@@ -391,7 +391,7 @@
 <!-- Edit Employee -->
 
 <!-- <div class="edit_employe_section "> -->
-  <div class="content_Sec p-4  bg-white edit_Employe_Form hidden">
+  <form class="content_Sec p-4  bg-white edit_Employe_Form hidden">
       
     <header class="form_Sect d-flex justify-content-between">
       <h4>Edit Employee</h4>  
@@ -580,7 +580,7 @@
 
 </div>
 
-</div>
+</form>
 
 <!-- </div> -->
 

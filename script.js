@@ -286,7 +286,7 @@ const save_btn=document.getElementById("save-btn");
 const change_btn=document.getElementsByClassName("change_btn");
 const edit_upload=document.getElementById("edit_upload");
 const edt_image=document.getElementById("edit_image");
-
+const edit_EmployeForm=document.getElementsByClassName("edit_Employe_Form");
 
 //previewing image while uploading
 
@@ -393,6 +393,25 @@ catch(error){
 
 
 
+
+
+
+save_btn.addEventListener("click", (e) => {
+
+  e.preventDefault();
+ 
+  validation();
+  editemplychange(id);
+   
+ });
+
+
+
+}
+
+
+
+
 async function editemplychange(id)
 {
 
@@ -454,8 +473,10 @@ async function editemplychange(id)
     tabledata.push(newemply);
     newemply.id=id;
     displaytotable(tabledata);
-    fetching();
+    location.reload() 
     edit_employe_close();
+    edit_EmployeForm.reset();
+
     
 
   }
@@ -466,20 +487,6 @@ async function editemplychange(id)
 
 }
 
-
-
-save_btn.addEventListener("click", (e) => {
-
-  e.preventDefault();
- 
-  validation();
-  editemplychange(id);
-   
- });
-
-
-
-}
 
 
 
@@ -687,51 +694,48 @@ document.addEventListener("keydown",(e) => {
 });
 
 
+
+
+
+// Deletion of a row in the table
+
+
 const del_btn=document.getElementById("del_btn");
 
-async function deletetable(id,k)
+function deletetable(id,k)
 {
 
 dele_dialog_open();
 
 
-try{
-  
-  const response= await fetch(`http://localhost:3000/employees/${id}`,{
-  
-method:"DELETE",
 
-})
-if(!response.ok){
-  throw new Error(`Error in delete (${response.status})`)
-}
+del_btn.addEventListener("click", async function () {
 
-del_btn.addEventListener("click", (e) => {
 
-  
-  tbody.deleteRow(k);
-  dele_dialog_close();
-  fetching();
+  try{
 
+   const response= await fetch(`http://localhost:3000/employees/${id}`,{
+      method: "DELETE"
+    });
+ 
+    if(!response.ok){
+      throw new Error(`Deletion cannot be done ${response.status}`)
+    }
+
+    tbody.deleteRow(k);
+    dele_dialog_close();
+    location.reload()
+
+
+  }
+  catch(error){
+    console.log(error);
+  }
 
 });
 
-}
-
-
-catch(error){
-  console.log("error in deletion "+ error);
-}
-
 
 }
-
-
-
-
-
-
-
 
 
 
@@ -750,7 +754,7 @@ const dele_dialog_open=function(){
   overlay.classList.remove("hidden"); 
 
 }
-// delet.addEventListener("click",dele_dialog_open);
+delet.addEventListener("click",dele_dialog_open);
 
 
 // function to hide delete_dialogue box
@@ -773,4 +777,30 @@ document.addEventListener("keydown",(e) => {
   }
 });
 
+
+
+//searching inside a table
+
+function searchTable() {
+  var input, filter, found, table, tr, td, i, j;
+  input = document.getElementById("searchinput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("mytable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td");
+      for (j = 0; j < td.length; j++) {
+          if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+              found = true;
+          }
+      }
+      if (found===true) {
+          tr[i].style.display = "";
+          found = false;
+      } else {
+          tr[i].style.display = "none";
+      }
+  }
+}
 
