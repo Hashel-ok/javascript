@@ -69,11 +69,11 @@
           <div class="list_heading d-flex justify-content-between p-3">
             <div class="textsec d-flex align-items-center gap-3">
               Employees List
-            <select class="form-select" aria-label="Default select example">
-              <option selected>1</option>
-              <option value="1">1</option>
+            <select class="form-select" id= "emply_perpage"aria-label="Default select example">
+              <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
+              <option value="4">4</option>
             </select>
             <span>of 10</span>
 
@@ -87,7 +87,7 @@
           <div class=" pt-3 table_Section p-3">
             <table class="table" id="mytable">
               <thead>
-                <tr>
+                <tr  id="tableHeader">
                   <th scope="col">Sl.No</th>
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
@@ -198,7 +198,7 @@
         
       <header class="form_Sect d-flex justify-content-between">
         <h4>Add Employee</h4>  
-        <button class="close add_employe_closebtn"><i class="fa-solid fa-x"></i></button>
+        <button type="button" class="close add_employe_closebtn"><i class="fa-solid fa-x"></i></button>
       </header>
       
       <!-- upload section -->
@@ -395,7 +395,7 @@
       
     <header class="form_Sect d-flex justify-content-between">
       <h4>Edit Employee</h4>  
-      <button class="close edit_Employ_close_btn"><i class="fa-solid fa-x"></i></button>
+      <button type="button" class="close edit_Employ_close_btn"><i class="fa-solid fa-x"></i></button>
     </header>
     
     <!-- upload section -->
@@ -590,7 +590,7 @@
 <div class="delete_dailog p-4 delete_template_form hidden">
   <div class="del_heading d-flex justify-content-between align-items-center">
     <span>Delete Employee</span>
-    <button class="close delet_close_btn"><i class="fa-solid fa-x"></i></button>
+    <button type="button" class="close delet_close_btn"><i class="fa-solid fa-x"></i></button>
   </div>
 
   <div class="warng_text pt-4">Are you sure you want to delete this employee?</div>

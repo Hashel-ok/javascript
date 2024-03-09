@@ -33,6 +33,7 @@ catch(error){
 
 fetching();
 
+let k = 1;
 
 const tbody=document.getElementById("tbody");
 
@@ -41,7 +42,7 @@ function displaytotable(data){
 
   let list=``;
   let i=data.length-1;
-  let k = 1;
+  // let k = 1;
   data.forEach(e => {
     list+=`<tr>
     <td scope="row">#${k}</td>
@@ -57,7 +58,7 @@ function displaytotable(data){
           <i class="fa-solid fa-ellipsis"></i>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item view_Details" href="profilepage.html" target="_blank"><i class="fa-solid fa-eye"></i> View Details</a></li>
+          <li><a class="dropdown-item view_Details" href="profilepage.html?id=${data[i].id}" target="_blank"><i class="fa-solid fa-eye"></i> View Details</a></li>
           <li><a class="dropdown-item edit" onclick=editemployeeform('${data[i].id}') href="#"><i class="fa-regular fa-pen-to-square"></i>Edit</a></li>
           <li><a class="dropdown-item delet" onclick=deletetable('${data[i].id}') ('${k}') href="#"> <i class="fa-solid fa-trash"></i> Delete</a></li>
         </ul>
@@ -71,6 +72,7 @@ k++;
   // console.log(i);
   });
 }
+
 
 
 //displaying and hidding for add employee form
@@ -98,6 +100,7 @@ const closeaddemploye=function(){
 
   add_Employe_Form.classList.add("hidden");
   overlay.classList.add("hidden");
+  
 
 }
 
@@ -257,6 +260,131 @@ e.preventDefault();
 
 
 
+function validation()
+
+{
+
+ 
+  const validateInput = (input, serial, msg) => {
+    if(input.value.trim() === ""){
+      errorMsg[serial].innerHTML = msg;
+    } 
+    else {
+     errorMsg[serial].innerHTML = "";
+     }
+    
+  }
+  
+  const validatePhoneno=(input,serial,msg) => {
+
+    let mobnovalue=input.value.trim();
+  
+    if(mobnovalue==="")
+    {
+      errorMsg[serial].innerHTML = msg;
+    }
+  
+    else if((mobnovalue.length)!= 10)
+    {
+  
+      errorMsg[serial].innerHTML ="Invalid phone no";
+    }
+    else{
+      errorMsg[serial].innerHTML ="";
+    }
+  
+  }
+  
+  
+  const validateEmail=(input,serial,msg) => 
+  {
+      let emailvalue=input.value.trim();
+      let emailregex= /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  
+    if(emailvalue==="")
+    {
+      errorMsg[serial].innerHTML = msg;
+    }
+  
+    else if(!(emailvalue.match(emailregex)))
+    {
+      errorMsg[serial].innerHTML="Invalid Email";
+    }
+  
+  else{
+    errorMsg[serial].innerHTML="";
+  }
+  }
+  
+  
+  const validateGender= (msg) => {
+  
+  if(!maleradio.checked==true && !femaleradio.checked==true )
+  {
+    errorMsg[6].innerHTML=msg;
+  }
+  else{
+    errorMsg[6].innerHTML="";
+  }
+  
+  }
+  
+  //add employe validateinput
+
+  validateInput(salutation, 0, "Please select salutation");
+  validateInput(first_name, 1, "Please enter first Name");
+  validateInput(last_name, 2, "Please enter last Name");
+  validateEmail(email, 3, "Please enter email");
+  validatePhoneno(mob_no, 4, "Please enter phone no");
+  validateInput(dateofbirth, 5, "Please select dateofbirth");
+  validateGender("Please select the Gender");
+  validateInput(username, 7, "Please enter username");
+  validateInput(password, 8, "Please enter password");
+  validateInput(qualification, 9, "Please enter qualifications");
+  validateInput(address, 10, "Please enter address");
+  validateInput(country, 11, "Please select country");
+  validateInput(state, 12, "Please select state");
+  validateInput(city, 13, "please enter city");
+  validateInput(pincode, 14, "please enter pincode");
+
+
+
+
+
+//add employe validation removal
+
+salutation.addEventListener("input",() => remove_validation_error(0));
+first_name.addEventListener("input",() => remove_validation_error(1))
+last_name.addEventListener("input", () => remove_validation_error(2))
+email.addEventListener("input",() => remove_validation_error(3));
+mob_no.addEventListener("input",() => remove_validation_error(4));
+dateofbirth.addEventListener("input",() => remove_validation_error(5));
+maleradio.addEventListener("input",() => remove_validation_error(6));
+femaleradio.addEventListener("input",() => remove_validation_error(6));
+username.addEventListener("input",() => remove_validation_error(7));
+password.addEventListener("input",() => remove_validation_error(8));
+qualification.addEventListener("input",() => remove_validation_error(9));
+address.addEventListener("input",() => remove_validation_error(10));
+country.addEventListener("input",() => remove_validation_error(11));
+state.addEventListener("input",() => remove_validation_error(12));
+city.addEventListener("input",() => remove_validation_error(13));
+pincode.addEventListener("input",() => remove_validation_error(14));
+
+
+
+function remove_validation_error(serial) 
+
+{
+
+    errorMsg[serial].innerHTML="";
+}
+
+
+}
+
+
+
+
 
 
 
@@ -334,7 +462,10 @@ if(!(response.ok)){
 }
 
 const data=await response.json();
-// console.log(data);
+
+console.log(data);
+
+
 
 edit_select.value=data.salutation;
 edit_fname.value=data.firstName;
@@ -394,13 +525,11 @@ catch(error){
 
 
 
-
-
 save_btn.addEventListener("click", (e) => {
 
   e.preventDefault();
  
-  validation();
+  editvalidation();
   editemplychange(id);
    
  });
@@ -491,11 +620,10 @@ async function editemplychange(id)
 
 
 
-function validation()
-
+function editvalidation()
 {
 
- 
+  
   const validateInput = (input, serial, msg) => {
     if(input.value.trim() === ""){
       errorMsg[serial].innerHTML = msg;
@@ -548,39 +676,8 @@ function validation()
   }
   
   
-  const validateGender= (msg) => {
+
   
-  if(!maleradio.checked==true && !femaleradio.checked==true )
-  {
-    errorMsg[6].innerHTML=msg;
-  }
-  else{
-    errorMsg[6].innerHTML="";
-  }
-  
-  }
-  
-  //add employe validateinput
-
-  validateInput(salutation, 0, "Please select salutation");
-  validateInput(first_name, 1, "Please enter first Name");
-  validateInput(last_name, 2, "Please enter last Name");
-  validateEmail(email, 3, "Please enter email");
-  validatePhoneno(mob_no, 4, "Please enter phone no");
-  validateInput(dateofbirth, 5, "Please select dateofbirth");
-  validateGender("Please select the Gender");
-  validateInput(username, 7, "Please enter username");
-  validateInput(password, 8, "Please enter password");
-  validateInput(qualification, 9, "Please enter qualifications");
-  validateInput(address, 10, "Please enter address");
-  validateInput(country, 11, "Please select country");
-  validateInput(state, 12, "Please select state");
-  validateInput(city, 13, "please enter city");
-  validateInput(pincode, 14, "please enter pincode");
-
-
-  //edit validate input
-
   validateInput(edit_fname, 15, "Please enter first Name");
   validateInput(edit_lname, 16, "Please enter last Name");
   validateEmail(edit_email, 17, "Please enter email");
@@ -596,30 +693,7 @@ function validation()
   validateInput(edit_pincode, 28, "please enter pincode");
 
 
-
-//add employe validation removal
-
-salutation.addEventListener("input",() => remove_validation_error(0));
-first_name.addEventListener("input",() => remove_validation_error(1))
-last_name.addEventListener("input", () => remove_validation_error(2))
-email.addEventListener("input",() => remove_validation_error(3));
-mob_no.addEventListener("input",() => remove_validation_error(4));
-dateofbirth.addEventListener("input",() => remove_validation_error(5));
-maleradio.addEventListener("input",() => remove_validation_error(6));
-femaleradio.addEventListener("input",() => remove_validation_error(6));
-username.addEventListener("input",() => remove_validation_error(7));
-password.addEventListener("input",() => remove_validation_error(8));
-qualification.addEventListener("input",() => remove_validation_error(9));
-address.addEventListener("input",() => remove_validation_error(10));
-country.addEventListener("input",() => remove_validation_error(11));
-state.addEventListener("input",() => remove_validation_error(12));
-city.addEventListener("input",() => remove_validation_error(13));
-pincode.addEventListener("input",() => remove_validation_error(14));
-
-
-
-
-
+  
 //edit remove validation..............
 edit_fname.addEventListener("input",() => remove_validation_error(15))
 edit_lname.addEventListener("input", () => remove_validation_error(16))
@@ -647,6 +721,8 @@ function remove_validation_error(serial)
 
 
 }
+
+
 
 
 
@@ -724,7 +800,7 @@ del_btn.addEventListener("click", async function () {
 
     tbody.deleteRow(k);
     dele_dialog_close();
-    location.reload()
+    location.reload();
 
 
   }
@@ -788,6 +864,7 @@ function searchTable() {
   table = document.getElementById("mytable");
   tr = table.getElementsByTagName("tr");
 
+
   for (i = 0; i < tr.length; i++) {
       td = tr[i].getElementsByTagName("td");
       for (j = 0; j < td.length; j++) {
@@ -801,6 +878,64 @@ function searchTable() {
       } else {
           tr[i].style.display = "none";
       }
+      
   }
+
+  
+ 
 }
+
+
+//pagination..................
+
+
+// const emply_perpage_div=document.getElementById("emply_perpage");
+
+
+
+// emply_perpage_div.addEventListener("input", () => {
+
+//   const emply_perpage=emply_perpage_div.value;
+
+//   const totalPages=Math.ceil(tabledata.length/emply_perpage);
+
+//   const pageNos = Array.from({length : totalPages}, (_, i) => i+1);
+
+  
+
+//   pageNos.forEach((pageNo) => {
+//     const startIndex = (pageNo - 1) * emply_perpage;
+//     const endIndex = startIndex + emply_perpage;
+
+//     if(k>=startIndex && k<=endIndex){
+
+//     }
+
+
+
+
+//   var input, filter, found, table, tr, td, i, j;
+//   input = document.getElementById("searchinput");
+//   filter = input.value.toUpperCase();
+//   table = document.getElementById("mytable");
+//   tr = table.getElementsByTagName("tr");
+
+
+//   for (i = 0; i < tr.length; i++) {
+//       td = tr[i].getElementsByTagName("td");
+
+//       if (k>=startIndex && k<=endIndex) {
+//           tr[i].style.display = "block";
+//       } else {
+//           tr[i].style.display = "none";
+//       }
+      
+//   }
+
+
+//   })
+
+
+
+// });
 

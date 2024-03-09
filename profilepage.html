@@ -47,7 +47,7 @@
           
         </div>
 
-        <div class="search_Section">
+        <!-- <div class="search_Section">
           <div class="inpugroup rounded search_input">
             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
       
@@ -60,7 +60,7 @@
 
           </div>
           
-        </div>
+        </div> -->
 
 
       </header>
@@ -71,15 +71,15 @@
     <img src="Background/Background Image.png" alt="">
 
     <div class="img_Sec">
-      <img src="Pics/Elipse 5.png" alt="">
+      <img src="Pics/Elipse 5.png" alt="" id="prfl_img">
   
     </div>
 
 
   </div>
   <div class="name_Sec d-flex flex-column align-items-center justify-content-center pb-5 ">
-    Mr. Michael Johnson
-    <span>michaeljohnson@example.com</span>
+    <div id="fullname">Mr. Michael Johnson</div>
+    <span id="prfl_email">michaeljohnson@example.com</span>
   </div>
 
 
@@ -91,17 +91,17 @@
     <div class="col d-flex flex-column gap-1 bg-white justify-content-center detal_Sec">
       
       Gender
-      <span>Male</span>
+      <span id="prfl_gender">Male</span>
 
     </div>
     <div class="col d-flex flex-column gap-1  justify-content-center bg-white detal_Sec">
       Age
-      <span>38</span>
+      <span id="prfl_age">38</span>
 
     </div>
     <div class="col d-flex flex-column gap-1  justify-content-center bg-white detal_Sec">
       Date of Birth
-      <span>20 December 1985</span>
+      <span id="prfl_dob">20 December 1985</span>
 
     </div>
 
@@ -114,7 +114,7 @@
     <div class="col d-flex flex-column gap-1 bg-white justify-content-center detal_Sec">
       
       Mobile Number
-      <span>9876543210</span>
+      <span id="prfl_mob">9876543210</span>
 
     </div>
 
@@ -122,7 +122,7 @@
     <div class="col d-flex flex-column gap-1 bg-white justify-content-center detal_Sec">
       
       Qualifications
-      <span>Bachelor's Degree</span>
+      <span id="prfl_qualification">Bachelor's Degree</span>
 
     </div>
 
@@ -136,7 +136,7 @@
     <div class="col d-flex flex-column gap-1 bg-white justify-content-center detal_Sec">
       
       Address
-      <span>789 Pine St Dummy Address,
+      <span id="prfl_address">789 Pine St Dummy Address,
         Chicago, Texas, USA 123456</span>
 
     </div>
@@ -145,7 +145,7 @@
     <div class="col d-flex flex-column gap-1 bg-white justify-content-center detal_Sec">
       
       Username
-      <span>michaeljohnson</span>
+      <span id="prfl_username">michaeljohnson</span>
 
     </div>
 
@@ -159,8 +159,8 @@
 <div class="profile_btns d-flex flex-row-reverse  pt-5 pb-4 gap-1">
 
 
-  <button class="btn-primary" type="button">Edit Details</button>
-  <button type="button" class="btn btn-danger">Delete</button>
+  <button class="btn-primary" type="button" id="prfl_editdetails">Edit Details</button>
+  <button type="button" class="btn btn-danger " id="prfl_delet">Delete</button>
 
 
 </div>
@@ -169,7 +169,7 @@
 
 </div>
 
-
+<div class="overlay hidden"></div>
 
 
 
@@ -190,10 +190,42 @@
 
       
     </div>
+
+  </div>
+
+
+<!-- edit form 
+  -->
+
+
+
+
+
+
+<!-- delete popup -->
+
+    <div class="delete_dailog p-4 delete_template_form  hidden">
+      <div class="del_heading d-flex justify-content-between align-items-center">
+        <span>Delete Employee</span>
+        <button type="button" class="close" id="delet_close_btn_prfl"><i class="fa-solid fa-x"></i></button>
+      </div>
+    
+      <div class="warng_text pt-4">Are you sure you want to delete this employee?</div>
+      <div class="del_btns d-flex flex-row-reverse  pt-4 gap-2">
+        <button type="button" class="btn btn-danger " id="del_btn_prfl">Delete</button>
+        <button type="button" class="btn btn-light" id="delet_cancel_btn_prfl">Cancel</button>
+        
+      </div>
+    
+    </div>
+
+
+  
   
 
-</div>
 
+
+<script src="profilescript.js"></script>
   
 </body>
 </html>
