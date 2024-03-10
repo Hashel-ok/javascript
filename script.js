@@ -58,7 +58,7 @@ function displaytotable(data){
           <i class="fa-solid fa-ellipsis"></i>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item view_Details" href="profilepage.html?id=${data[i].id}" target="_blank"><i class="fa-solid fa-eye"></i> View Details</a></li>
+          <li><a class="dropdown-item view_Details" href="profilepage.html?id=${data[i].id}" ><i class="fa-solid fa-eye"></i> View Details</a></li>
           <li><a class="dropdown-item edit" onclick=editemployeeform('${data[i].id}') href="#"><i class="fa-regular fa-pen-to-square"></i>Edit</a></li>
           <li><a class="dropdown-item delet" onclick=deletetable('${data[i].id}') ('${k}') href="#"> <i class="fa-solid fa-trash"></i> Delete</a></li>
         </ul>
@@ -205,7 +205,7 @@ async function addemplytotable(){
   }
 
   const resposne_data= await response.json();
-  console.log("sdds",resposne_data);
+  // console.log("sdds",resposne_data);
 
   const sid = resposne_data.id;
   const avatarFile = inputfile.files[0];
@@ -349,10 +349,6 @@ function validation()
 
 
 
-
-
-//add employe validation removal
-
 salutation.addEventListener("input",() => remove_validation_error(0));
 first_name.addEventListener("input",() => remove_validation_error(1))
 last_name.addEventListener("input", () => remove_validation_error(2))
@@ -427,20 +423,6 @@ edt_image.src=URL.createObjectURL(edit_upload.files[0]);
 
 
 
-// function for updating the edit form
-function edit_dob(dateofbirth){
-
-  let db=dateofbirth.split("-");
-  
-  let year=db[0];
-  let month=db[1];
-  let day=db[2];
-  
-  let dateformat=day+'-'+month+'-'+year;
-  
-  return dateformat;
-  }
-  
   
 
 
@@ -552,7 +534,7 @@ async function editemplychange(id)
     lastName:edit_lname.value,
     email:edit_email.value,
     phone:edit_mobno.value,
-    dob:edit_dob(edit_dateofbirth.value),
+    dob:dob(edit_dateofbirth.value),
     gender:(edit_maleradio.checked==true) ? 'Male' : 'Female',
     qualifications:edit_qualification.value,
     address:edit_address.value,
@@ -705,8 +687,7 @@ edit_username.addEventListener("input",() => remove_validation_error(21));
 edit_password.addEventListener("input",() => remove_validation_error(22));
 edit_qualification.addEventListener("input",() => remove_validation_error(23));
 edit_address.addEventListener("input",() => remove_validation_error(24));
-edit_country.addEventListener("input",() => remove_validation_error(25));
-edit_state.addEventListener("input",() => remove_validation_error(26));
+
 edit_city.addEventListener("input",() => remove_validation_error(27));
 edit_pincode.addEventListener("input",() => remove_validation_error(28));
 

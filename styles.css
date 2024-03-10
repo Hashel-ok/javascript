@@ -591,7 +591,10 @@ box-shadow: none;
   height: 90vh;
   width: 792px;
 }
+.prfle_edit_form{
 
+  height: 120vh;
+}
 
 
   ::-webkit-scrollbar {
