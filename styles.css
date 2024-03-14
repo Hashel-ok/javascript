@@ -645,3 +645,8 @@ box-shadow: none;
 .table>:not(:last-child)>:last-child>* {
   border-bottom-color: rgba(211, 216, 226, 1) !important;
 }
+
+.page-item i{
+  font-size: 12px;
+   
+}
